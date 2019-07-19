@@ -5,15 +5,21 @@
   
 
   
-  <title>Hexo</title>
+  <title>HashMap底层原理 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="HashMap底层是采用数组加链表的方式来实现的。 图示：  1）当使用put方法时，通过对Key进行Hash函数运算得到一个Hash值。因为得到的Hash值比较大，为了满足能够得到对应的数组下标，将hash值与数组长度进行取余运算，得到Key对应的数组下标值。 先查找出数组位置是否存在对象。存在，则把里面的链表拿出来，判断链表中是否存在key值与传递过来的Key值一样的对象。存在，则把传递过来的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HashMap底层原理">
+<meta property="og:url" content="http://yoursite.com/2019/07/19/HashMap底层原理/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="HashMap底层是采用数组加链表的方式来实现的。 图示：  1）当使用put方法时，通过对Key进行Hash函数运算得到一个Hash值。因为得到的Hash值比较大，为了满足能够得到对应的数组下标，将hash值与数组长度进行取余运算，得到Key对应的数组下标值。 先查找出数组位置是否存在对象。存在，则把里面的链表拿出来，判断链表中是否存在key值与传递过来的Key值一样的对象。存在，则把传递过来的">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="c:/Users/admin/AppData/Local/YNote/data/qq3FA58BAE3FA88C0101F733E9A3EB692F/6d23b8f2a0fc4340ac93b80ecbb16298/clipboard.png">
+<meta property="og:updated_time" content="2019-07-19T05:50:24.305Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="HashMap底层原理">
+<meta name="twitter:description" content="HashMap底层是采用数组加链表的方式来实现的。 图示：  1）当使用put方法时，通过对Key进行Hash函数运算得到一个Hash值。因为得到的Hash值比较大，为了满足能够得到对应的数组下标，将hash值与数组长度进行取余运算，得到Key对应的数组下标值。 先查找出数组位置是否存在对象。存在，则把里面的链表拿出来，判断链表中是否存在key值与传递过来的Key值一样的对象。存在，则把传递过来的">
+<meta name="twitter:image" content="c:/Users/admin/AppData/Local/YNote/data/qq3FA58BAE3FA88C0101F733E9A3EB692F/6d23b8f2a0fc4340ac93b80ecbb16298/clipboard.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,9 +66,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-HashMap底层原理" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-HashMap底层原理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/19/HashMap底层原理/" class="article-date">
   <time datetime="2019-07-19T05:48:06.000Z" itemprop="datePublished">2019-07-19</time>
@@ -75,8 +79,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/19/HashMap底层原理/">HashMap底层原理</a>
+    <h1 class="article-title" itemprop="name">
+      HashMap底层原理
     </h1>
   
 
@@ -117,60 +121,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/07/19/hello-world/" class="article-date">
-  <time datetime="2019-07-19T04:37:12.900Z" itemprop="datePublished">2019-07-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/19/hello-world/">Hello World</a>
-    </h1>
+    <a href="/2019/07/19/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/19/hello-world/" data-id="cjy9oqgcf000148ttmw7n249b" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-
 
 </section>
         
