@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2019-07-19</span>
-            <span class="time">16:53:35</span>
+            <span class="time">16:55:57</span>
           </span>
           
         </div>
@@ -121,7 +121,7 @@
 <p>①插入链表的顺序不同（JDK7是插入头结点，JDK8因为要遍历链表把链表变成红黑树所以采用插入尾结点的方法）</p>
 <p>②链表会转变成红黑树</p>
 <p>③hash算法简化</p>
-<p>④resize【扩容】的逻辑修改（JDK7会出现死循环(死锁)，JDK8不会）（<a href="http://www.importnew.com/22011.html" target="_blank" rel="noopener">死锁场景</a>）</p>
+<p>④resize【扩容】的逻辑修改（JDK7会出现死循环(死锁)，JDK8不会）</p>
 <p>5）简化Hash算法的原因：</p>
 <p>JDK7中保证数组的散列性是因为对链表进行查询操作时还是需要遍历整个链表的。如果整个数组中就只有一个空间被用到了，那么整个HashMap中的元素就都会放置在数组中该位置的链表中，进行遍历链表的效率就降低了。</p>
 <p>JDK8中当链表中的元素超过8个时，链表就会变成红黑树，红黑树的遍历效率就比链表要高的多，因为对于Hash算法保证散列性的要求就没有那么高了，因此，hash算法就现对于JDK7简化了。</p>
